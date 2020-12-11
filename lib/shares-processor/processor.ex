@@ -81,9 +81,13 @@ defmodule SP.Processor do
         %{row | stocks: Map.merge(zeroes, row.stocks)}
       end)
 
+    IO.puts("Producing output map...")
+
     sidList =
       unfiltered
       |> Enum.filter(fn x -> Enum.any?(x.stocks, fn {_, jumlah} -> jumlah >= 500_000 end) end)
+
+    IO.puts("Producing aggregate map...")
 
     aggregate =
       unfiltered
@@ -113,7 +117,7 @@ defmodule SP.Processor do
 
     ([headers(dates)] ++
        (data
-        |> Enum.sort_by(fn x -> x.sid end, :desc)
+        |> Enum.sort_by(fn x -> x.stocks end, :desc)
         |> Enum.map(fn x ->
           [x.name, x.other_alias, x.sid] ++
             Enum.map(x.stocks, fn {_, v} -> Integer.to_string(v) end)

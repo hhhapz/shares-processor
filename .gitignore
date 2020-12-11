@@ -26,6 +26,6 @@ shares_processor-*.tar
 # Temporary files for e.g. tests
 /tmp
 
-output.csv
-output-aggregate.csv
+output/
 data/
+shares_processor
